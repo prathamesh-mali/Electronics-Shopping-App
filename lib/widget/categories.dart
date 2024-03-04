@@ -17,7 +17,6 @@ class _ElecCategoriesState extends State<ElecCategories> {
     super.initState();
     final appData = Provider.of<AppData>(context, listen: false);
 
-    // Call filterItemsByCategory with index of "all" category on app start
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       appData
           .filterItemsByCategory(0); // Assuming index 0 is for "all" category

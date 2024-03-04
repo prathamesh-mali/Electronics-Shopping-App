@@ -14,7 +14,7 @@ class ProductScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
@@ -35,7 +35,6 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         Consumer<AppData>(
           builder: (context, value, child) {
-            Product pdindex = value.getProducts()[index];
             value.initializeFavoriteProducts(value.getfilteredProducts());
             return IconButton(
               icon: value.getfilteredProducts()[index].isFavorite
