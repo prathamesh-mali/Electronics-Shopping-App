@@ -1,19 +1,20 @@
 import 'package:elec_ecom_app/Data/app_data.dart';
 import 'package:elec_ecom_app/Models/product.dart';
-import 'package:elec_ecom_app/Screens/product_page.dart';
+import 'package:elec_ecom_app/widget/product_page.dart';
+import 'package:elec_ecom_app/support/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({
-    super.key,
-    required this.items,
-  });
   final List<Product> items;
+  final List categories;
+
+  const ProductScreen({Key? key, required this.items, required this.categories})
+      : super(key: key);
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  _ProductScreenState createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
@@ -22,7 +23,7 @@ class _ProductScreenState extends State<ProductScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          width: 80,
+          width: 86,
           padding: const EdgeInsets.all(8),
           child: Text(
             product.name,
@@ -35,19 +36,20 @@ class _ProductScreenState extends State<ProductScreen> {
         Consumer<AppData>(
           builder: (context, value, child) {
             Product pdindex = value.getProducts()[index];
-            value.initializeFavoriteProducts(value.getProducts());
+            value.initializeFavoriteProducts(value.getfilteredProducts());
             return IconButton(
-              icon: value.getProducts()[index].isFavorite
+              icon: value.getfilteredProducts()[index].isFavorite
                   ? const Icon(
                       FontAwesomeIcons.solidHeart,
-                      color: Colors.redAccent,
+                      color: AppColors.favoriteLike,
                     )
                   : Icon(
                       FontAwesomeIcons.heart,
                       color: Colors.grey[850],
                     ),
               onPressed: () {
-                value.addToFavorite(pdindex, index);
+                print(index);
+                value.addToFavorite(index);
               },
             );
           },
@@ -97,65 +99,68 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Reccomended Products",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("See all", style: TextStyle(color: Colors.blue)),
-            )
-          ],
-        ),
-        GridView.builder(
-          itemCount: widget.items.length,
-          shrinkWrap: true,
-          physics: const ScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 10 / 16,
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
+    return Consumer<AppData>(
+      builder: (context, value, child) => Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Recommended Products",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("See all", style: TextStyle(color: Colors.blue)),
+              )
+            ],
           ),
-          itemBuilder: (_, index) {
-            Product product = widget.items[index];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[350],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GridTile(
-                  header: _gridItemHeader(product, context, index),
-                  footer: _gridItemFooter(product, context),
-                  child: GestureDetector(
-                    child: _gridItemBody(product, context),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductPage(
-                            index: index,
-                            product: product,
+          GridView.builder(
+            itemCount: value.filteredProducts.length,
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 10 / 16,
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+            ),
+            itemBuilder: (_, index) {
+              Product product = value.filteredProducts[index];
+
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: GridTile(
+                    header: _gridItemHeader(product, context, index),
+                    footer: _gridItemFooter(product, context),
+                    child: GestureDetector(
+                      child: _gridItemBody(product, context),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductPage(
+                              index: index,
+                              product: product,
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-      ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

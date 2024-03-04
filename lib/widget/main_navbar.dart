@@ -32,9 +32,7 @@ class _MainNavBarState extends State<MainNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: GNav(
-        curve: Curves.easeOutExpo,
         style: GnavStyle.google,
-        duration: const Duration(milliseconds: 900),
         iconSize: 24,
         gap: 9,
         onTabChange: (index) => navigateBottomBar(index),

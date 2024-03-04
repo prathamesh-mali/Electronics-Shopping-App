@@ -1,4 +1,4 @@
-import 'package:elec_ecom_app/Screens/settings_page.dart';
+import 'package:elec_ecom_app/Screens/settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

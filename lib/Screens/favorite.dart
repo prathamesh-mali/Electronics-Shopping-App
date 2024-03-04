@@ -1,10 +1,11 @@
 import 'package:elec_ecom_app/Data/app_data.dart';
-import 'package:elec_ecom_app/Screens/product_page.dart';
+import 'package:elec_ecom_app/widget/product_page.dart';
+import 'package:elec_ecom_app/support/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({super.key});
+  const FavoriteScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +35,11 @@ class FavoriteScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ProductPage(
-                                      product: value.getProducts()[index],
+                                      product: value.favoriteProducts[index],
                                       index: index)));
                         },
                         visualDensity: const VisualDensity(vertical: 4),
-                        tileColor: Colors.grey.shade300,
+                        tileColor: AppColors.grey50,
                         shape: BeveledRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
                         title: Text(

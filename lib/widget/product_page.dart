@@ -1,4 +1,5 @@
 import 'package:elec_ecom_app/Screens/cart_screen.dart';
+import 'package:elec_ecom_app/support/AppColors.dart';
 import 'package:elec_ecom_app/widget/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -167,7 +168,7 @@ class _ProductPageState extends State<ProductPage> {
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Icon(
                             FontAwesomeIcons.plus,
-                            color: Colors.deepOrange,
+                            color: AppColors.orangeAcc,
                           ),
                         ),
                       )
@@ -204,7 +205,7 @@ class _ProductPageState extends State<ProductPage> {
                     width: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.deepOrange,
+                      color: AppColors.orangeAcc,
                     ),
                     child: const Text(
                       "Add to Cart",
@@ -231,13 +232,13 @@ class _ProductPageState extends State<ProductPage> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1.5,
-                          color: Colors.deepOrangeAccent,
+                          color: AppColors.orangeAcc,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
                         Icons.shopping_cart,
-                        color: Colors.deepOrangeAccent,
+                        color: AppColors.orangeAcc,
                       ),
                     ),
                   ),

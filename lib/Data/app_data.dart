@@ -58,22 +58,6 @@ class AppData extends ChangeNotifier {
       type: ProductType.mobile,
     ),
     Product(
-      name: "Samsung Tab S8",
-      price: 45000,
-      about: dummyText,
-      isAvailable: true,
-      off: 44999,
-      quantity: 1,
-      images: [
-        'assets/images/tab_s8_1.png',
-        'assets/images/tab_s8_2.png',
-        'assets/images/tab_s8_3.png'
-      ],
-      isFavorite: false,
-      rating: 4.5,
-      type: ProductType.mobile,
-    ),
-    Product(
       name: "Sony X80",
       price: 16000,
       about: dummyText,
@@ -86,7 +70,7 @@ class AppData extends ChangeNotifier {
       ],
       isFavorite: false,
       rating: 3.5,
-      type: ProductType.headphone,
+      type: ProductType.tv,
     ),
     Product(
       name: "Samsung Tab 7",
@@ -167,7 +151,7 @@ class AppData extends ChangeNotifier {
       type: ProductType.tv,
     ),
     Product(
-        name: "Samsung Tab 8",
+        name: "Samsung Tab S8",
         price: 30000,
         about: dummyText,
         isAvailable: false,
@@ -179,7 +163,7 @@ class AppData extends ChangeNotifier {
         ],
         isFavorite: false,
         rating: 4,
-        type: ProductType.tv)
+        type: ProductType.tablet)
   ];
 
   static List<ProductCategory> categories = [
@@ -212,28 +196,32 @@ class AppData extends ChangeNotifier {
   ];
 
   List<Product> Cart = [];
+  List<Product> allProducts = AppData.products;
+  List<Product> favoriteProducts = [];
+  List<Product> filteredProducts = [];
 
   List<Product> geCart() {
     return Cart;
-  }
-
-  List<Product> favoriteProducts = [];
-  List<Product> filterFavoriteProducts(List<Product> products) {
-    return products.where((product) => product.isFavorite).toList();
-  }
-
-  void initializeFavoriteProducts(List<Product> products) {
-    favoriteProducts = filterFavoriteProducts(products);
   }
 
   List<Product> getProducts() {
     return products;
   }
 
-  List<Product> allProducts = AppData.products;
+  List<ProductCategory> getCategory() {
+    return AppData.categories;
+  }
 
-  addToFavorite(Product product, int index) {
-    products[index].isFavorite = !products[index].isFavorite;
+  List<Product> filterFavoriteProducts(List<Product> filteredProducts) {
+    return filteredProducts.where((product) => product.isFavorite).toList();
+  }
+
+  void initializeFavoriteProducts(List<Product> filteredProducts) {
+    favoriteProducts = filterFavoriteProducts(filteredProducts);
+  }
+
+  addToFavorite(int index) {
+    filteredProducts[index].isFavorite = !filteredProducts[index].isFavorite;
     notifyListeners();
   }
 
@@ -249,18 +237,7 @@ class AppData extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Product> filteredProductbyCategory = [];
-
-  List<Product> filterProductsByCategory(
-      List<Product> products, ProductType category) {
-    List<Product> filteredProducts = [];
-
-    for (Product product in products) {
-      if (product.type == category) {
-        filteredProducts.add(product);
-      }
-    }
-
+  List<Product> getfilteredProducts() {
     return filteredProducts;
   }
 
@@ -274,7 +251,6 @@ class AppData extends ChangeNotifier {
     } else {
       Cart.add(product);
     }
-
     notifyListeners();
   }
 
@@ -290,4 +266,44 @@ class AppData extends ChangeNotifier {
     }
     return totalPrice;
   }
+
+  void filterItemsByCategory(int index) {
+    for (ProductCategory element in categories) {
+      element.isSelected = false;
+    }
+    categories[index].isSelected = true;
+
+    if (categories[index].type == ProductType.all) {
+      if (filteredProducts == favoriteProducts) {
+        filteredProducts = List.from(favoriteProducts);
+      } else {
+        filteredProducts = List.from(allProducts);
+      }
+    } else {
+      filteredProducts = allProducts
+          .where((item) => item.type == categories[index].type)
+          .toList();
+    }
+    print("Filtering products by category: ${categories[index].type}");
+
+    notifyListeners();
+  }
+
+  // void filterItemsByCategory(int index) {
+  //   for (ProductCategory element in categories) {
+  //     element.isSelected = false;
+  //   }
+  //   categories[index].isSelected = true;
+  //
+  //   if (categories[index].type == ProductType.all) {
+  //     filteredProducts = List.from(allProducts);
+  //   } else {
+  //     filteredProducts = allProducts
+  //         .where((item) => item.type == categories[index].type)
+  //         .toList();
+  //   }
+  //   print("Filtering products by category: ${categories[index].type}");
+  //
+  //   notifyListeners();
+  // }
 }

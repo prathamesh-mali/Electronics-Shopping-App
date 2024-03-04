@@ -1,4 +1,11 @@
-enum ProductType { all, watch, mobile, headphone, tablet, tv }
+enum ProductType {
+  all,
+  watch,
+  mobile,
+  headphone,
+  tablet,
+  tv,
+}
 
 class Product {
   String name;

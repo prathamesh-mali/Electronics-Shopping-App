@@ -1,8 +1,9 @@
 import 'package:elec_ecom_app/Screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:elec_ecom_app/Data/app_data.dart';
-import 'categories.dart';
+
+import '../Data/app_data.dart';
+import '../widget/categories.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -63,17 +64,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: 100,
-            //   width: 400,
-            //   child: ListView(
-            //     scrollDirection: Axis.horizontal,
-            //     children: const [],
-            //   ),
-            // ),
-            const ElecCategories(),
+            ElecCategories(
+              categories: AppData.categories,
+            ),
             ProductScreen(
-              items: AppData.products,
+              items: AppData().filteredProducts,
+              categories: AppData.categories,
             ),
           ],
         ),

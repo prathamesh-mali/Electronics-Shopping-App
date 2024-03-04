@@ -214,6 +214,9 @@ class CartScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Container(
+                  child: Text("Proceed to Buy"),
                 )
               ],
             );
