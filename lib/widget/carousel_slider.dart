@@ -1,3 +1,4 @@
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -49,7 +50,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
           controller: _pageController,
           effect: const WormEffect(
             dotColor: Colors.white,
-            activeDotColor: Colors.deepOrange,
+            activeDotColor: AppColors.blueAcc,
           ),
           count: widget.items.length,
         ),

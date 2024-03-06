@@ -1,6 +1,6 @@
 import 'package:elec_ecom_app/Data/app_data.dart';
 import 'package:elec_ecom_app/widget/product_page.dart';
-import 'package:elec_ecom_app/support/AppColors.dart';
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +39,7 @@ class FavoriteScreen extends StatelessWidget {
                                       index: index)));
                         },
                         visualDensity: const VisualDensity(vertical: 4),
-                        tileColor: AppColors.grey50,
+                        tileColor: AppColors.darkGrey,
                         shape: BeveledRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
                         title: Text(

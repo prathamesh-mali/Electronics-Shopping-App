@@ -33,33 +33,29 @@ class _MainNavBarState extends State<MainNavBar> {
     return Scaffold(
       bottomNavigationBar: GNav(
         style: GnavStyle.google,
-        iconSize: 24,
-        gap: 9,
+        tabBackgroundColor: Colors.lightBlue.shade100,
+        tabBorderRadius: 10,
+        activeColor: Colors.blue,
+        tabMargin: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+        iconSize: 20,
+        gap: 7,
         onTabChange: (index) => navigateBottomBar(index),
         tabs: const [
           GButton(
             text: 'Home',
             icon: Icons.home,
-            iconActiveColor: Colors.deepOrange,
-            textColor: Colors.deepOrange,
           ),
           GButton(
             icon: FontAwesomeIcons.solidHeart,
             text: 'Wishlist',
-            textColor: Colors.deepOrange,
-            iconActiveColor: Colors.deepOrange,
           ),
           GButton(
             icon: FontAwesomeIcons.cartShopping,
-            iconActiveColor: Colors.deepOrange,
             text: "Cart",
-            textColor: Colors.deepOrange,
           ),
           GButton(
             icon: FontAwesomeIcons.solidUser,
             text: 'Account',
-            iconActiveColor: Colors.deepOrange,
-            textColor: Colors.deepOrange,
           )
         ],
       ),

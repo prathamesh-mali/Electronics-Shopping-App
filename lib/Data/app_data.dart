@@ -274,36 +274,29 @@ class AppData extends ChangeNotifier {
     categories[index].isSelected = true;
 
     if (categories[index].type == ProductType.all) {
-      if (filteredProducts == favoriteProducts) {
-        filteredProducts = List.from(favoriteProducts);
-      } else {
-        filteredProducts = List.from(allProducts);
-      }
+      // If "all" category is selected, include all products
+      filteredProducts.clear(); // Clear previous filtered products
+      filteredProducts
+          .addAll(allProducts); // Copy all products to filtered products
     } else {
-      filteredProducts = allProducts
-          .where((item) => item.type == categories[index].type)
-          .toList();
+      // Filter products based on the selected category
+      filteredProducts.clear(); // Clear previous filtered products
+      for (int i = 0; i < allProducts.length; i++) {
+        if (allProducts[i].type == categories[index].type) {
+          filteredProducts.add(allProducts[i]);
+        }
+      }
     }
-    print("Filtering products by category: ${categories[index].type}");
 
+    if (categories[index].type != ProductType.all) {
+      List<Product> favoriteProducts =
+          allProducts.where((item) => item.isFavorite).toList();
+      for (int i = 0; i < favoriteProducts.length; i++) {
+        if (filteredProducts.contains(favoriteProducts[i])) {
+          filteredProducts.remove(favoriteProducts[i]);
+        }
+      }
+    }
     notifyListeners();
   }
-
-  // void filterItemsByCategory(int index) {
-  //   for (ProductCategory element in categories) {
-  //     element.isSelected = false;
-  //   }
-  //   categories[index].isSelected = true;
-  //
-  //   if (categories[index].type == ProductType.all) {
-  //     filteredProducts = List.from(allProducts);
-  //   } else {
-  //     filteredProducts = allProducts
-  //         .where((item) => item.type == categories[index].type)
-  //         .toList();
-  //   }
-  //   print("Filtering products by category: ${categories[index].type}");
-  //
-  //   notifyListeners();
-  // }
 }

@@ -1,7 +1,7 @@
 import 'package:elec_ecom_app/Data/app_data.dart';
 import 'package:elec_ecom_app/Models/product.dart';
 import 'package:elec_ecom_app/widget/product_page.dart';
-import 'package:elec_ecom_app/support/AppColors.dart';
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         Consumer<AppData>(
           builder: (context, value, child) {
-            value.initializeFavoriteProducts(value.getfilteredProducts());
+            value.initializeFavoriteProducts(value.getProducts());
             return IconButton(
               icon: value.getfilteredProducts()[index].isFavorite
                   ? const Icon(
@@ -47,7 +47,6 @@ class _ProductScreenState extends State<ProductScreen> {
                       color: Colors.grey[850],
                     ),
               onPressed: () {
-                print(index);
                 value.addToFavorite(index);
               },
             );
@@ -101,22 +100,6 @@ class _ProductScreenState extends State<ProductScreen> {
     return Consumer<AppData>(
       builder: (context, value, child) => Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Recommended Products",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("See all", style: TextStyle(color: Colors.blue)),
-              )
-            ],
-          ),
           GridView.builder(
             itemCount: value.filteredProducts.length,
             shrinkWrap: true,
@@ -128,30 +111,39 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
             itemBuilder: (_, index) {
               Product product = value.filteredProducts[index];
-
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: AppColors.darkGrey,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: GridTile(
-                    header: _gridItemHeader(product, context, index),
-                    footer: _gridItemFooter(product, context),
-                    child: GestureDetector(
-                      child: _gridItemBody(product, context),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductPage(
-                              index: index,
-                              product: product,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10.0,
+                      left: 8,
+                      right: 8,
+                    ),
+                    child: GridTile(
+                      header: _gridItemHeader(product, context, index),
+                      footer: _gridItemFooter(product, context),
+                      child: GestureDetector(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: _gridItemBody(product, context),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductPage(
+                                index: index,
+                                product: product,
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

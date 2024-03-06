@@ -1,3 +1,4 @@
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:elec_ecom_app/Data/app_data.dart';
 import 'package:elec_ecom_app/Models/product.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class CartScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.78,
+                    height: MediaQuery.of(context).size.height * 0.65,
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const ScrollPhysics(),
@@ -50,11 +51,11 @@ class CartScreen extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Container(
-                            height: 400,
+                            height: 385,
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: Colors.grey.shade400,
+                              color: AppColors.darkGrey,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,14 +84,14 @@ class CartScreen extends StatelessWidget {
                                         },
                                         child: const Icon(
                                           Icons.delete,
-                                          color: Colors.deepOrangeAccent,
+                                          color: AppColors.blueAcc,
                                         ),
                                       ),
                                     )
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 Container(
                                   alignment: Alignment.center,
@@ -188,7 +189,8 @@ class CartScreen extends StatelessWidget {
                   thickness: 0.85,
                 ),
                 Container(
-                  margin: const EdgeInsets.all(10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -216,7 +218,21 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  child: Text("Proceed to Buy"),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  alignment: Alignment.center,
+                  height: 55,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppColors.blueAcc,
+                  ),
+                  child: const Text(
+                    "Proceed to Buy",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 )
               ],
             );

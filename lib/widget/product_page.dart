@@ -1,5 +1,5 @@
 import 'package:elec_ecom_app/Screens/cart_screen.dart';
-import 'package:elec_ecom_app/support/AppColors.dart';
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:elec_ecom_app/widget/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -131,7 +131,7 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Row(
                     children: [
                       InkWell(
@@ -142,7 +142,7 @@ class _ProductPageState extends State<ProductPage> {
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Icon(
                             FontAwesomeIcons.minus,
-                            color: Colors.deepOrange,
+                            color: AppColors.blueAcc,
                           ),
                         ),
                       ),
@@ -168,7 +168,7 @@ class _ProductPageState extends State<ProductPage> {
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Icon(
                             FontAwesomeIcons.plus,
-                            color: AppColors.orangeAcc,
+                            color: AppColors.blueAcc,
                           ),
                         ),
                       )
@@ -205,7 +205,7 @@ class _ProductPageState extends State<ProductPage> {
                     width: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: AppColors.orangeAcc,
+                      color: AppColors.blueAcc,
                     ),
                     child: const Text(
                       "Add to Cart",
@@ -232,13 +232,13 @@ class _ProductPageState extends State<ProductPage> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1.5,
-                          color: AppColors.orangeAcc,
+                          color: AppColors.blueAcc,
                         ),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
                         Icons.shopping_cart,
-                        color: AppColors.orangeAcc,
+                        color: AppColors.blueAcc,
                       ),
                     ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:elec_ecom_app/Data/app_data.dart';
-import 'package:elec_ecom_app/support/AppColors.dart';
+import 'package:elec_ecom_app/Constants/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'widget/main_navbar.dart';
